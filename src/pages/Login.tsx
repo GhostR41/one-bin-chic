@@ -4,7 +4,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import { signInWithGoogle } from '@/utils/auth';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
-import { Shield, Chrome, Eye } from 'lucide-react';
+import { Shield, Chrome } from 'lucide-react';
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
@@ -47,14 +47,6 @@ const Login = () => {
     }
   };
 
-  const handleViewerAccess = () => {
-    loginAsViewer();
-    toast({
-      title: "Viewer Access Granted",
-      description: "You can view the portfolio but cannot make edits.",
-    });
-    navigate('/', { replace: true });
-  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5 flex items-center justify-center p-4 relative overflow-hidden">
@@ -80,64 +72,27 @@ const Login = () => {
 
         {/* Login Card */}
         <div className="bg-card/50 backdrop-blur-sm border border-border rounded-lg p-8 shadow-xl">
-          <div className="space-y-6">
-            {/* Admin Login Section */}
-            <div>
-              <h3 className="text-lg font-semibold text-foreground mb-4">Admin Access</h3>
-              <div className="bg-primary/5 border border-primary/20 rounded-lg p-4 mb-4">
-                <div className="flex items-start gap-3">
-                  <Shield className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
-                  <div className="text-sm text-muted-foreground">
-                    <p className="font-medium text-foreground mb-1">Full Control</p>
-                    <p>Admin can edit and manage all portfolio content in real-time.</p>
-                  </div>
+          <div>
+            <h3 className="text-lg font-semibold text-foreground mb-4">Login To Access</h3>
+            <div className="bg-primary/5 border border-primary/20 rounded-lg p-4 mb-4">
+              <div className="flex items-start gap-3">
+                <Shield className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                <div className="text-sm text-muted-foreground">
+                  <p className="font-medium text-foreground mb-1">Full Control</p>
+                  <p>Admin can edit and manage all portfolio content in real-time.</p>
                 </div>
               </div>
-
-              <Button
-                onClick={handleGoogleSignIn}
-                disabled={loading}
-                className="w-full h-12 text-base font-semibold"
-                size="lg"
-              >
-                <Chrome className="w-5 h-5 mr-2" />
-                {loading ? 'Authenticating...' : 'Admin Sign in with Google'}
-              </Button>
             </div>
 
-            {/* Divider */}
-            <div className="relative">
-              <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-border"></div>
-              </div>
-              <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-card px-2 text-muted-foreground">Or</span>
-              </div>
-            </div>
-
-            {/* Viewer Access Section */}
-            <div>
-              <h3 className="text-lg font-semibold text-foreground mb-4">Viewer Access</h3>
-              <div className="bg-accent/5 border border-accent/20 rounded-lg p-4 mb-4">
-                <div className="flex items-start gap-3">
-                  <Eye className="w-5 h-5 text-accent mt-0.5 flex-shrink-0" />
-                  <div className="text-sm text-muted-foreground">
-                    <p className="font-medium text-foreground mb-1">View Only</p>
-                    <p>View the portfolio with live updates. No credentials required.</p>
-                  </div>
-                </div>
-              </div>
-
-              <Button
-                onClick={handleViewerAccess}
-                variant="secondary"
-                className="w-full h-12 text-base font-semibold"
-                size="lg"
-              >
-                <Eye className="w-5 h-5 mr-2" />
-                Enter as Viewer
-              </Button>
-            </div>
+            <Button
+              onClick={handleGoogleSignIn}
+              disabled={loading}
+              className="w-full h-12 text-base font-semibold"
+              size="lg"
+            >
+              <Chrome className="w-5 h-5 mr-2" />
+              {loading ? 'Authenticating...' : 'Admin Sign in with Google'}
+            </Button>
           </div>
         </div>
 
